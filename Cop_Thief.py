@@ -18,6 +18,11 @@ THIEF_COLOR = (255, 200, 0)
 COP_COLOR = (0, 100, 255)
 PIZZA_COLOR = (255, 0, 0)
 
+#Music function
+def play_song(path, loop=True):
+    pygame.mixer.music.load(path)
+    pygame.mixer.music.play(-1 if loop else 0)
+
 # Initialize
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -26,8 +31,7 @@ clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 36)
 
 # Load and play background music
-pygame.mixer.music.load("Minecraftsong.mp3")
-pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
+play_song("Minecraftsong.mp3")
 
 # Player objects
 thief = pygame.Rect(100, 100, PLAYER_SIZE, PLAYER_SIZE)
