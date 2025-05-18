@@ -1,6 +1,10 @@
 import pygame
 import random
 
+# Load and play background music
+pygame.mixer.music.load("assets/song.mp3")
+pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
+
 # Constants
 WIDTH, HEIGHT = 800, 600
 PLAYER_SIZE = 40
