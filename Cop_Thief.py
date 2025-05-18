@@ -1,9 +1,6 @@
 import pygame
 import random
 
-# Load and play background music
-pygame.mixer.music.load("assets/song.mp3")
-pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
 
 # Constants
 WIDTH, HEIGHT = 800, 600
@@ -28,17 +25,24 @@ pygame.display.set_caption("Pizza Thief")
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 36)
 
+# Load and play background music
+pygame.mixer.music.load("Minecraftsong.mp3")
+pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
+
 # Player objects
 thief = pygame.Rect(100, 100, PLAYER_SIZE, PLAYER_SIZE)
 cop = pygame.Rect(600, 400, PLAYER_SIZE, PLAYER_SIZE)
 
 # Pizza list
 pizzas = []
+
+
 def spawn_pizzas(count):
     for _ in range(count):
         x = random.randint(0, WIDTH - PIZZA_SIZE)
         y = random.randint(0, HEIGHT - PIZZA_SIZE)
         pizzas.append(pygame.Rect(x, y, PIZZA_SIZE, PIZZA_SIZE))
+
 
 # Game state
 thief_score = 0
@@ -72,7 +76,7 @@ while running:
         if keys[pygame.K_DOWN]: cop.y += 4
         if keys[pygame.K_LEFT]: cop.x -= 4
         if keys[pygame.K_RIGHT]: cop.x += 4
-        
+
         # Boundaries
         thief.clamp_ip(screen.get_rect())
         cop.clamp_ip(screen.get_rect())
@@ -82,7 +86,7 @@ while running:
             if thief.colliderect(pizza):
                 pizzas.remove(pizza)
                 thief_score += 1
-        
+
         # Spawn more pizzas if needed
         while len(pizzas) < 4 and thief_score < TOTAL_PIZZAS:
             spawn_pizzas(1)
